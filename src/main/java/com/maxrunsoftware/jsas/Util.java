@@ -19,8 +19,6 @@ import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import java.util.regex.Pattern;
 
-import org.apache.commons.lang3.tuple.ImmutablePair;
-
 public final class Util {
 	public static final String httpAuthorizationEncode(String username, String password) {
 		final var up = username + ":" + password;
@@ -30,7 +28,17 @@ public final class Util {
 		return strFull;
 	}
 
-	public static final ImmutablePair<String, String> httpAuthorizationDecode(String authorization) {
+	public static class HttpAuthorizationCredential {
+		public final String username;
+		public final String password;
+
+		private HttpAuthorizationCredential(String username, String password) {
+			this.username = username;
+			this.password = password;
+		}
+	}
+
+	public static final HttpAuthorizationCredential httpAuthorizationDecode(String authorization) {
 		if (authorization == null)
 			return null;
 		if (!authorization.toLowerCase().startsWith("basic"))
@@ -40,7 +48,7 @@ public final class Util {
 		final var credDecoded = Base64.getDecoder().decode(base64Credentials);
 		final var credentials = new String(credDecoded, StandardCharsets.UTF_8);
 		final var values = credentials.split(":", 2);
-		return new ImmutablePair<String, String>(values[0], values[1]);
+		return new HttpAuthorizationCredential(values[0], values[1]);
 	}
 
 	public static final byte[] copy(byte[] bytes) {

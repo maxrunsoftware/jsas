@@ -47,8 +47,8 @@ public class Servlet extends HttpServlet {
 			return;
 		}
 
-		var resourceName = authUserPass.left;
-		var password = authUserPass.right;
+		var resourceName = authUserPass.username;
+		var password = authUserPass.password;
 
 		var resource = resources.getResource(password, resourceName);
 		if (resource == null) {

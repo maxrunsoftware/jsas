@@ -46,7 +46,7 @@ public class App {
 
 	public static void main(String[] args) {
 		LoggingSetup.initialize(System.getenv("JSAS_LOGGING"));
-		LOG.info("(J)ava (S)imple (A)uthenticator (S)ervice v" + Version.VALUE + "  dev@maxrunsoftware.com");
+		LOG.info("(J)ava (S)imple (A)uthenticator (S)ervice  v" + Version.VALUE + "  dev@maxrunsoftware.com");
 
 		var module = new AbstractModule() {
 			@Override
