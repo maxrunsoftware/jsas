@@ -25,6 +25,7 @@ import com.google.inject.Injector;
 import com.maxrunsoftware.jsas.impl.HttpClientApache;
 import com.maxrunsoftware.jsas.impl.ResourceServiceDisk;
 import com.maxrunsoftware.jsas.impl.SettingServiceEnvironment;
+import com.maxrunsoftware.jsas.impl.VfsDisk;
 import com.maxrunsoftware.jsas.impl.WebServerJetty;
 
 public class App {
@@ -55,6 +56,7 @@ public class App {
 				bind(ResourceService.class).to(ResourceServiceDisk.class);
 				bind(WebServer.class).to(WebServerJetty.class);
 				bind(HttpClient.class).to(HttpClientApache.class);
+				bind(Vfs.class).to(VfsDisk.class);
 			}
 		};
 		Injector injector = Guice.createInjector(module);
