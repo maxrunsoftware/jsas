@@ -24,6 +24,8 @@ public interface SettingService {
 
 	public String getDirectory();
 
+	public int getDirectoryCacheTime();
+
 	public int getMaxThreads();
 
 	public int getMinThreads();

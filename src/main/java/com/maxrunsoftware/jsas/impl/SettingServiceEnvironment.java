@@ -37,14 +37,19 @@ public class SettingServiceEnvironment implements SettingService {
 	}
 
 	@Override
-	public int getPort() {
-		return getEnvVar("JSAS_PORT", 8080);
+	public int getDirectoryCacheTime() {
+		return getEnvVar("JSAS_DIRCACHETIME", 5000);
 	}
 
 	@Override
 	public String getDirectory() {
 		return getEnvVar("JSAS_DIR", Paths.get(".").toAbsolutePath().normalize().toString());
 		// return "/Users/user/Temp";
+	}
+
+	@Override
+	public int getPort() {
+		return getEnvVar("JSAS_PORT", 8080);
 	}
 
 	@Override
