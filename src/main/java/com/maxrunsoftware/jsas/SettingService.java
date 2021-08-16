@@ -20,6 +20,9 @@ import java.util.Map;
 import org.apache.commons.collections4.map.CaseInsensitiveMap;
 
 public interface SettingService {
+
+	public String getLogging();
+
 	public int getPort();
 
 	public String getDirectory();

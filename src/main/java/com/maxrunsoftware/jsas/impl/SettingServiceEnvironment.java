@@ -37,6 +37,11 @@ public class SettingServiceEnvironment implements SettingService {
 	}
 
 	@Override
+	public String getLogging() {
+		return getEnvVar("JSAS_LOGGING", "info");
+	}
+
+	@Override
 	public int getDirectoryCacheTime() {
 		return getEnvVar("JSAS_DIRCACHETIME", 5000);
 	}
