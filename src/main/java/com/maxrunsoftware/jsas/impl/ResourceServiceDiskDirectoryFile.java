@@ -15,16 +15,15 @@
  */
 package com.maxrunsoftware.jsas.impl;
 
-import java.util.List;
-
 import org.apache.commons.io.FilenameUtils;
 
+import com.maxrunsoftware.jsas.Constant;
 import com.maxrunsoftware.jsas.Resource;
 import com.maxrunsoftware.jsas.Util;
 import com.maxrunsoftware.jsas.VfsFile;
 
 public class ResourceServiceDiskDirectoryFile {
-	private static final List<String> TXT_EXTS = List.of("txt", "html");
+
 	private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory
 			.getLogger(ResourceServiceDiskDirectoryFile.class);
 
@@ -64,7 +63,7 @@ public class ResourceServiceDiskDirectoryFile {
 		LOG.trace(file.getPath() + " [ResourceName]: " + rName);
 
 		var isText = false;
-		for (var txt : TXT_EXTS) {
+		for (var txt : Constant.TXT_EXTS) {
 			if (extension.toLowerCase().equals(txt)) {
 				isText = true;
 			}

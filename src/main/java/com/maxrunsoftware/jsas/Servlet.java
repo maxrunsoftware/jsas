@@ -34,7 +34,7 @@ public class Servlet extends HttpServlet {
 
 	@Override
 	public void init() throws ServletException {
-		this.resources = (ResourceService) getServletContext().getAttribute("ResourceService");
+		this.resources = (ResourceService) getServletContext().getAttribute(ResourceService.class.getName());
 	}
 
 	@Override
@@ -64,8 +64,8 @@ public class Servlet extends HttpServlet {
 
 	private void unauthorized(HttpServletResponse response) throws IOException {
 		LOG.info("Unauthorized");
-		response.setContentType("text/plain");
-		response.setCharacterEncoding("UTF-8");
+		response.setContentType(Constant.CONTENTTYPE_TEXT);
+		response.setCharacterEncoding(Constant.ENCODING_UTF8);
 
 		response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 		response.getWriter().println("UNAUTHORIZED");
@@ -75,13 +75,13 @@ public class Servlet extends HttpServlet {
 		checkNotNull(resource);
 
 		if (resource.isText()) {
-			response.setContentType("text/plain");
-			response.setCharacterEncoding("UTF-8");
+			response.setContentType(Constant.CONTENTTYPE_TEXT);
+			response.setCharacterEncoding(Constant.ENCODING_UTF8);
 			response.setStatus(HttpServletResponse.SC_OK);
 			response.getWriter().print(resource.getText());
 		} else {
 			var bytes = resource.getData();
-			response.setContentType("application/octet-stream");
+			response.setContentType(Constant.CONTENTTYPE_BINARY);
 			response.setHeader("Content-Disposition", "filename=\"" + resource.getFilename() + "\"");
 			response.setContentLength(bytes.length);
 			response.setStatus(HttpServletResponse.SC_OK);

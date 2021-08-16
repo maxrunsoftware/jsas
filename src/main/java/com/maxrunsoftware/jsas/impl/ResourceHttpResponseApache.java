@@ -26,6 +26,7 @@ import org.apache.hc.core5.http.HttpEntity;
 import org.apache.hc.core5.http.ParseException;
 import org.apache.hc.core5.http.io.entity.EntityUtils;
 
+import com.maxrunsoftware.jsas.Constant;
 import com.maxrunsoftware.jsas.Resource;
 import com.maxrunsoftware.jsas.Util;
 
@@ -64,19 +65,6 @@ public class ResourceHttpResponseApache implements Resource {
 	}
 
 	private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger(ResourceHttpResponseApache.class);
-	private static final String[] MIME_TEXT = new String[] {
-			//@formatter:off
-			"text/plain", 
-			"text/css", 
-			"text/csv", 
-			"text/html",
-			"text/calendar", 
-			"text/javascript", 
-			"application/xhtml+xml", 
-			"application/xml", 
-			"text/xml", 
-			//@formatter:on
-	};
 
 	private final String name;
 	private final String description;
@@ -124,7 +112,7 @@ public class ResourceHttpResponseApache implements Resource {
 
 		// get isText
 		var istext = false;
-		for (var mimeText : MIME_TEXT) {
+		for (var mimeText : Constant.MIME_TEXT) {
 			if (contentType.contains(mimeText)) {
 				istext = true;
 				break;

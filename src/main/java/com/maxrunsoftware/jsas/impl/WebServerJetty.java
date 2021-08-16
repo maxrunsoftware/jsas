@@ -78,7 +78,7 @@ public class WebServerJetty implements WebServer {
 		context.setContextPath("/");
 
 		// Option 2: Using ServletContext attribute
-		context.setAttribute("ResourceService", resources);
+		context.setAttribute(ResourceService.class.getName(), resources);
 		context.addServlet(Servlet.class, "/*");
 
 		server.setHandler(context);
