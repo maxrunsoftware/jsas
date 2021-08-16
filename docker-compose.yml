@@ -1,0 +1,16 @@
+version: '3'
+services:
+    jsas-app:
+        image: openjdk:16
+        container_name: jsasapp
+        hostname: jsasapp
+        ports:
+            - "8080:8080"
+        volumes:
+            - .:/var/jsas
+        environment:
+            - JSAS_DIR=/var/jsas
+            - JSAS_LOGGING=trace
+        working_dir: /var/jsas
+        command: java -jar jsas.jar
+        restart: always
