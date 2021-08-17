@@ -35,6 +35,7 @@ public class VfsDisk implements Vfs {
 
 		public VfsFileDisk(File file) {
 			this.file = checkNotNull(file);
+			LOG.debug(getClass().getSimpleName() + "(" + getPath() + ")");
 		}
 
 		@Override

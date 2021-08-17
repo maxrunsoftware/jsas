@@ -45,7 +45,12 @@ public class ResourceServiceDisk implements ResourceService {
 		LOG.debug("Getting resource " + resourceName);
 
 		synchronized (locker) {
-			if (dirCache == null || dirCache.isExpired()) dirCache = new ResourceServiceDiskDirectory(settings.getDirectory(), settings.getDirectoryCacheTime(), vfs);
+			if (dirCache == null || dirCache.isExpired()) {
+				var dir = settings.getDirectory();
+				var dirCacheTime = settings.getDirectoryCacheTime();
+				LOG.debug("Rebuilding cache (" + dirCacheTime + ") of directory " + dir);
+				dirCache = new ResourceServiceDiskDirectory(dir, dirCacheTime, vfs);
+			}
 
 			return dirCache.getResource(password, resourceName);
 		}
