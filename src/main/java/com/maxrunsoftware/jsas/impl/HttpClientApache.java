@@ -17,12 +17,6 @@ package com.maxrunsoftware.jsas.impl;
 
 import static com.google.common.base.Preconditions.*;
 
-import java.security.cert.CertificateException;
-import java.security.cert.X509Certificate;
-
-import javax.net.ssl.HostnameVerifier;
-import javax.net.ssl.SSLSession;
-
 import org.apache.hc.client5.http.classic.methods.HttpGet;
 import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
 import org.apache.hc.client5.http.impl.classic.CloseableHttpResponse;
@@ -30,7 +24,6 @@ import org.apache.hc.client5.http.impl.classic.HttpClients;
 import org.apache.hc.client5.http.impl.io.PoolingHttpClientConnectionManagerBuilder;
 import org.apache.hc.client5.http.ssl.SSLConnectionSocketFactory;
 import org.apache.hc.core5.ssl.SSLContextBuilder;
-import org.apache.hc.core5.ssl.TrustStrategy;
 
 import com.maxrunsoftware.jsas.HttpClient;
 import com.maxrunsoftware.jsas.Resource;
@@ -64,28 +57,19 @@ public class HttpClientApache implements HttpClient {
 
 		SSLContextBuilder sshbuilder = new SSLContextBuilder();
 
-		// sshbuilder.loadTrustMaterial(null, new TrustSelfSignedStrategy());
-		var trustStrategy = new TrustStrategy() {
-			@Override
-			public boolean isTrusted(X509Certificate[] chain, String authType) throws CertificateException {
-				return true;
-			}
-		};
-		sshbuilder.loadTrustMaterial(null, trustStrategy);
+		sshbuilder.loadTrustMaterial(null, (chain, authType) -> true);
 
-		var hostnameVerifier = new HostnameVerifier() {
-			@Override
-			public boolean verify(String hostname, SSLSession session) {
-				return true;
-			}
-		};
-		SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(sshbuilder.build(), hostnameVerifier);
+		SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(sshbuilder.build(), (hostname, session) -> true);
 
 		var pcm = PoolingHttpClientConnectionManagerBuilder.create().setSSLSocketFactory(sslsf).build();
 
-		CloseableHttpClient httpclient = HttpClients.custom().setDefaultCredentialsProvider(null).setConnectionManager(pcm)
-
-				.setDefaultCookieStore(null).build();
+		//@formatter:off
+		CloseableHttpClient httpclient = HttpClients.custom()
+				.setDefaultCredentialsProvider(null)
+				.setConnectionManager(pcm)
+				.setDefaultCookieStore(null)
+				.build();
+		//@formatter:on
 
 		return httpclient;
 	}
