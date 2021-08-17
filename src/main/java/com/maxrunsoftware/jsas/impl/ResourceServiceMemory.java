@@ -15,7 +15,7 @@
  */
 package com.maxrunsoftware.jsas.impl;
 
-import static com.google.common.base.Preconditions.checkNotNull;
+import static com.google.common.base.Preconditions.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -45,14 +45,10 @@ public class ResourceServiceMemory implements ResourceService {
 		}
 
 		public boolean equals(ResourceKey o) {
-			if (o == this)
-				return true;
-			if (o == null)
-				return false;
-			if (!password.equals(o.password))
-				return false;
-			if (!resourceName.toLowerCase().equals(o.resourceName.toLowerCase()))
-				return false;
+			if (o == this) return true;
+			if (o == null) return false;
+			if (!password.equals(o.password)) return false;
+			if (!resourceName.toLowerCase().equals(o.resourceName.toLowerCase())) return false;
 			return true;
 		}
 

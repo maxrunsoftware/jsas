@@ -15,7 +15,7 @@
  */
 package com.maxrunsoftware.jsas.impl;
 
-import static com.google.common.base.Preconditions.checkNotNull;
+import static com.google.common.base.Preconditions.*;
 
 import com.maxrunsoftware.jsas.Util;
 import com.maxrunsoftware.jsas.VfsFile;
@@ -30,19 +30,18 @@ public class ResourceFile extends ResourceBase {
 	public ResourceFile(VfsFile file, String filename, String name, boolean isText) {
 		super(name, filename, isText);
 		this.file = checkNotNull(file);
+		LOG.debug(getClass().getSimpleName() + "(" + file.getPath() + ", " + filename + ", " + name + ", " + isText + ")");
 	}
 
 	@Override
 	public byte[] getData() {
-		if (isText())
-			return null;
+		if (isText()) return null;
 		return readFile();
 	}
 
 	private byte[] readFile() {
 		if (!dataLoaded) {
 			dataLoaded = true;
-			LOG.debug("Reading file " + file.getPath());
 			data = file.getData();
 		}
 		return data;
@@ -50,11 +49,9 @@ public class ResourceFile extends ResourceBase {
 
 	@Override
 	public String getText() {
-		if (!isText())
-			return null;
+		if (!isText()) return null;
 		var bytes = readFile();
-		if (bytes == null)
-			return null;
+		if (bytes == null) return null;
 		return Util.asString(bytes);
 	}
 }

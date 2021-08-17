@@ -15,7 +15,7 @@
  */
 package com.maxrunsoftware.jsas.impl;
 
-import static com.google.common.base.Preconditions.checkNotNull;
+import static com.google.common.base.Preconditions.*;
 
 public class ResourceText extends ResourceBase {
 

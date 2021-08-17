@@ -24,15 +24,13 @@ public class SettingServiceEnvironment implements SettingService {
 	private String getEnvVar(String name, String defaultValue) {
 		var val = System.getenv(name);
 		val = Util.trimOrNull(val);
-		if (val != null)
-			return val;
+		if (val != null) return val;
 		return defaultValue;
 	}
 
 	private int getEnvVar(String name, int defaultValue) {
 		var val = getEnvVar(name, null);
-		if (val == null)
-			return defaultValue;
+		if (val == null) return defaultValue;
 		return Integer.parseInt(val);
 	}
 

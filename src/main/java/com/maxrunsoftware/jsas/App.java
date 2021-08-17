@@ -15,7 +15,7 @@
  */
 package com.maxrunsoftware.jsas;
 
-import static com.google.common.base.Preconditions.checkNotNull;
+import static com.google.common.base.Preconditions.*;
 
 import javax.inject.Inject;
 
@@ -85,9 +85,7 @@ public class App {
 	}
 
 	private void handleClient(String[] args) {
-		if (args.length != 3) {
-			throw new Error("Invalid arguments");
-		}
+		if (args.length != 3) throw new Error("Invalid arguments");
 
 		var host = args[0];
 		var pass = args[1];
@@ -97,6 +95,7 @@ public class App {
 		if (resource == null) {
 			LOG.warn("Error retrieving response");
 		} else {
+
 			if (resource.isText()) {
 				LOG.info("Received Text: \n" + resource.getText());
 			} else {

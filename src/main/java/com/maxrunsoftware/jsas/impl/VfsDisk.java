@@ -15,7 +15,7 @@
  */
 package com.maxrunsoftware.jsas.impl;
 
-import static com.google.common.base.Preconditions.checkNotNull;
+import static com.google.common.base.Preconditions.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -61,12 +61,8 @@ public class VfsDisk implements Vfs {
 				} catch (IOException e) {
 					LOG.trace("Error in getCanonicalPath() for file " + file.getAbsolutePath());
 				}
-				if (path == null) {
-					path = file.getAbsolutePath();
-				}
-				if (path == null) {
-					path = file.getName();
-				}
+				if (path == null) { path = file.getAbsolutePath(); }
+				if (path == null) { path = file.getName(); }
 			}
 			return path;
 		}

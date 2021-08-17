@@ -42,9 +42,7 @@ public class ResourceHttpResponseApache implements Resource {
 				var val = Util.trimOrNull(header.getValue());
 
 				if (name != null && val != null) {
-					if (!map.containsKey(name)) {
-						map.put(name, new ArrayList<String>());
-					}
+					if (!map.containsKey(name)) map.put(name, new ArrayList<String>());
 					map.get(name).add(val);
 				}
 			}
@@ -53,12 +51,8 @@ public class ResourceHttpResponseApache implements Resource {
 
 		public String getFirst(String name) {
 			var list = headers.get(name);
-			if (list == null) {
-				return null;
-			}
-			if (list.size() == 0) {
-				return null;
-			}
+			if (list == null) { return null; }
+			if (list.size() == 0) { return null; }
 			return list.get(0);
 		}
 

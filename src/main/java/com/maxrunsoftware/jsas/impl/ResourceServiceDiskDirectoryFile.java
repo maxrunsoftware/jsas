@@ -24,8 +24,7 @@ import com.maxrunsoftware.jsas.VfsFile;
 
 public class ResourceServiceDiskDirectoryFile {
 
-	private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory
-			.getLogger(ResourceServiceDiskDirectoryFile.class);
+	private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger(ResourceServiceDiskDirectoryFile.class);
 
 	private final String password;
 	private final String resourceName;
@@ -64,9 +63,7 @@ public class ResourceServiceDiskDirectoryFile {
 
 		var isText = false;
 		for (var txt : Constant.TXT_EXTS) {
-			if (extension.toLowerCase().equals(txt)) {
-				isText = true;
-			}
+			if (extension.toLowerCase().equals(txt)) { isText = true; }
 		}
 
 		var resource = new ResourceFile(file, rName + "." + extension, rName, isText);

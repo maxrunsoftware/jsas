@@ -15,7 +15,7 @@
  */
 package com.maxrunsoftware.jsas.impl;
 
-import static com.google.common.base.Preconditions.checkNotNull;
+import static com.google.common.base.Preconditions.*;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
@@ -43,9 +43,7 @@ public class ResourceServiceDiskDirectory implements ResourceService {
 
 		for (var file : files) {
 			var dirFile = new ResourceServiceDiskDirectoryFile(file);
-			if (dirFile.getResource() != null) {
-				dirFiles.add(dirFile);
-			}
+			if (dirFile.getResource() != null) { dirFiles.add(dirFile); }
 		}
 
 		this.timestamp = LocalDateTime.now();
@@ -58,9 +56,7 @@ public class ResourceServiceDiskDirectory implements ResourceService {
 		var n = checkNotNull(resourceName).toLowerCase();
 
 		for (var dirFile : dirFiles) {
-			if (p.equals(dirFile.getPassword()) && n.equals(dirFile.getResourceName())) {
-				return dirFile.getResource();
-			}
+			if (p.equals(dirFile.getPassword()) && n.equals(dirFile.getResourceName())) return dirFile.getResource();
 		}
 
 		return null;

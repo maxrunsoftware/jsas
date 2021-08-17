@@ -23,8 +23,7 @@ import org.apache.log4j.PatternLayout;
 
 public final class LoggingSetup {
 
-	private LoggingSetup() {
-	}
+	private LoggingSetup() {}
 
 	public static final int LEVEL_TRACE = 1;
 	public static final int LEVEL_DEBUG = 2;
@@ -34,36 +33,31 @@ public final class LoggingSetup {
 
 	private static Level parseLevel(int level) {
 		switch (level) {
-		case LEVEL_TRACE:
-			return Level.TRACE;
-		case LEVEL_DEBUG:
-			return Level.DEBUG;
-		case LEVEL_INFO:
-			return Level.INFO;
-		case LEVEL_WARN:
-			return Level.WARN;
-		case LEVEL_ERROR:
-			return Level.ERROR;
-		default:
-			return Level.INFO;
+			case LEVEL_TRACE:
+				return Level.TRACE;
+			case LEVEL_DEBUG:
+				return Level.DEBUG;
+			case LEVEL_INFO:
+				return Level.INFO;
+			case LEVEL_WARN:
+				return Level.WARN;
+			case LEVEL_ERROR:
+				return Level.ERROR;
+			default:
+				return Level.INFO;
 		}
 	}
 
 	private static Level parseLevel(String level) {
 		level = Util.trimOrNull(level);
-		if (level == null)
-			return Level.INFO;
+		if (level == null) return Level.INFO;
+
 		level = level.toLowerCase();
-		if (level.equals("trace"))
-			return Level.TRACE;
-		if (level.equals("debug"))
-			return Level.DEBUG;
-		if (level.equals("info"))
-			return Level.INFO;
-		if (level.equals("warn"))
-			return Level.WARN;
-		if (level.equals("error"))
-			return Level.ERROR;
+		if (level.equals("trace")) return Level.TRACE;
+		if (level.equals("debug")) return Level.DEBUG;
+		if (level.equals("info")) return Level.INFO;
+		if (level.equals("warn")) return Level.WARN;
+		if (level.equals("error")) return Level.ERROR;
 		return Level.INFO;
 	}
 
@@ -87,8 +81,7 @@ public final class LoggingSetup {
 		rootLogger.removeAllAppenders();
 		rootLogger.addAppender(new ConsoleAppender(layout));
 
-		var disables = new String[] { "org.apache.hc.client5.http", "org.apache.hc.client5.http.wire",
-				"org.eclipse.jetty", };
+		var disables = new String[] { "org.apache.hc.client5.http", "org.apache.hc.client5.http.wire", "org.eclipse.jetty", };
 
 		for (var disable : disables) {
 			LogManager.getLogger(disable).setLevel(Level.INFO);

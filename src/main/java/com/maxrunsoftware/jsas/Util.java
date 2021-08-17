@@ -39,10 +39,8 @@ public final class Util {
 	}
 
 	public static final HttpAuthorizationCredential httpAuthorizationDecode(String authorization) {
-		if (authorization == null)
-			return null;
-		if (!authorization.toLowerCase().startsWith("basic"))
-			return null;
+		if (authorization == null) return null;
+		if (!authorization.toLowerCase().startsWith("basic")) return null;
 
 		final var base64Credentials = authorization.substring("Basic".length()).trim();
 		final var credDecoded = Base64.getDecoder().decode(base64Credentials);
@@ -52,8 +50,7 @@ public final class Util {
 	}
 
 	public static final byte[] copy(byte[] bytes) {
-		if (bytes == null)
-			return null;
+		if (bytes == null) return null;
 		byte[] dest = new byte[bytes.length];
 		System.arraycopy(bytes, 0, dest, 0, bytes.length);
 		return dest;
@@ -68,11 +65,9 @@ public final class Util {
 	}
 
 	public static final String trimOrNull(String s) {
-		if (s == null)
-			return null;
+		if (s == null) return null;
 		s = s.trim();
-		if (s.length() == 0)
-			return null;
+		if (s.length() == 0) return null;
 		return s;
 	}
 
@@ -89,8 +84,7 @@ public final class Util {
 	@SafeVarargs
 	public static final <T> T coalesce(T... values) {
 		for (var val : values) {
-			if (val != null)
-				return val;
+			if (val != null) return val;
 		}
 		return null;
 	}

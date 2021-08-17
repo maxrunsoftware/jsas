@@ -15,7 +15,7 @@
  */
 package com.maxrunsoftware.jsas;
 
-import static com.google.common.base.Preconditions.checkNotNull;
+import static com.google.common.base.Preconditions.*;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -38,8 +38,7 @@ public class Servlet extends HttpServlet {
 	}
 
 	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		var authUserPass = Util.httpAuthorizationDecode(request.getHeader("AUTHORIZATION"));
 		if (authUserPass == null) {
 			LOG.info("No credentials provided");

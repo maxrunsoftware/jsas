@@ -15,7 +15,7 @@
  */
 package com.maxrunsoftware.jsas.impl;
 
-import static com.google.common.base.Preconditions.checkNotNull;
+import static com.google.common.base.Preconditions.*;
 
 import java.io.IOException;
 
@@ -36,9 +36,7 @@ public class HttpClientApache implements HttpClient {
 	public Resource Get(String host, String username, String password) {
 		checkNotNull(host);
 		HttpGet httpGet = new HttpGet(host);
-		if (username != null) {
-			httpGet.addHeader("Authorization", Util.httpAuthorizationEncode(username, password));
-		}
+		if (username != null) { httpGet.addHeader("Authorization", Util.httpAuthorizationEncode(username, password)); }
 		try {
 			try (CloseableHttpClient httpclient = HttpClients.createDefault()) {
 				try (CloseableHttpResponse response = httpclient.execute(httpGet)) {

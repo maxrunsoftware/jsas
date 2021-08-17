@@ -37,6 +37,7 @@ public interface SettingService {
 
 	default Map<String, Object> toMap() {
 		var map = new CaseInsensitiveMap<String, Object>();
+		map.put("Logging", getLogging());
 		map.put("Port", getPort());
 		map.put("Directory", getDirectory());
 		map.put("MaxThreads", getMaxThreads());

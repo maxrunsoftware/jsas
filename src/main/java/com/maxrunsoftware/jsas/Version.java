@@ -18,6 +18,5 @@ package com.maxrunsoftware.jsas;
 public class Version {
 	public static final String VALUE = "1.0.0";
 
-	private Version() {
-	}
+	private Version() {}
 }

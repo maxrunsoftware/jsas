@@ -15,7 +15,7 @@
  */
 package com.maxrunsoftware.jsas.impl;
 
-import static com.google.common.base.Preconditions.checkNotNull;
+import static com.google.common.base.Preconditions.*;
 
 import javax.inject.Inject;
 
@@ -45,10 +45,7 @@ public class ResourceServiceDisk implements ResourceService {
 		LOG.debug("Getting resource " + resourceName);
 
 		synchronized (locker) {
-			if (dirCache == null || dirCache.isExpired()) {
-				dirCache = new ResourceServiceDiskDirectory(settings.getDirectory(), settings.getDirectoryCacheTime(),
-						vfs);
-			}
+			if (dirCache == null || dirCache.isExpired()) dirCache = new ResourceServiceDiskDirectory(settings.getDirectory(), settings.getDirectoryCacheTime(), vfs);
 
 			return dirCache.getResource(password, resourceName);
 		}
