@@ -65,23 +65,21 @@ public class HttpClientApache implements HttpClient {
 		SSLContextBuilder sshbuilder = new SSLContextBuilder();
 
 		// sshbuilder.loadTrustMaterial(null, new TrustSelfSignedStrategy());
-		sshbuilder.loadTrustMaterial(null, new TrustStrategy() {
-
+		var trustStrategy = new TrustStrategy() {
 			@Override
 			public boolean isTrusted(X509Certificate[] chain, String authType) throws CertificateException {
 				return true;
 			}
+		};
+		sshbuilder.loadTrustMaterial(null, trustStrategy);
 
-		});
-
-		SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(sshbuilder.build(), new HostnameVerifier() {
-
+		var hostnameVerifier = new HostnameVerifier() {
 			@Override
 			public boolean verify(String hostname, SSLSession session) {
 				return true;
 			}
-
-		});
+		};
+		SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(sshbuilder.build(), hostnameVerifier);
 
 		var pcm = PoolingHttpClientConnectionManagerBuilder.create().setSSLSocketFactory(sslsf).build();
 
