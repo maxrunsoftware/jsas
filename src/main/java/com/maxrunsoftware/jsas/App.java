@@ -77,8 +77,7 @@ public class App {
 	private void handleServer() {
 		try {
 			webServer.start();
-
-//			webServer.stop();
+			// webServer.stop();
 		} catch (Exception e) {
 			LOG.error("Error in web server", e);
 		}
