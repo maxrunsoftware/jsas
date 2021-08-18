@@ -70,7 +70,9 @@ public class ResourceHttpResponseApache implements Resource {
 
 	public ResourceHttpResponseApache(CloseableHttpResponse response) throws IOException {
 		name = "" + response.getCode();
+		LOG.trace("name: " + name);
 		description = response.getReasonPhrase();
+		LOG.trace("description: " + description);
 
 		var headers = new HeadersParser(response);
 
@@ -88,6 +90,7 @@ public class ResourceHttpResponseApache implements Resource {
 
 		// get contentType
 		contentType = Util.coalesce(headers.getFirst("Content-Type"), "application/octet-stream").toLowerCase();
+		LOG.trace("Content-Type: " + contentType);
 
 		// get filename;
 		String fn = null;
@@ -103,6 +106,7 @@ public class ResourceHttpResponseApache implements Resource {
 			}
 		}
 		filename = fn;
+		LOG.trace("content-disposition: " + cd);
 
 		// get isText
 		var istext = false;
@@ -113,19 +117,21 @@ public class ResourceHttpResponseApache implements Resource {
 			}
 		}
 		isText = istext;
+		LOG.trace("isText=" + isText);
 
 		HttpEntity httpEntity = response.getEntity();
 		if (isText) {
 			try {
 				text = EntityUtils.toString(httpEntity);
 				data = null;
+				LOG.trace("text: " + text);
 			} catch (ParseException e) {
 				throw new IOException("Error parsing text stream from HttpEntity", e);
 			}
 		} else {
 			text = null;
 			data = EntityUtils.toByteArray(httpEntity);
-
+			LOG.trace("data: byte[" + data.length + "]");
 		}
 
 	}

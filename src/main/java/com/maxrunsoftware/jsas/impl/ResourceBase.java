@@ -20,6 +20,7 @@ import static com.google.common.base.Preconditions.*;
 import com.maxrunsoftware.jsas.Resource;
 
 public abstract class ResourceBase implements Resource {
+	private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger(ResourceFile.class);
 
 	private final String name;
 	private final boolean text;
@@ -30,6 +31,7 @@ public abstract class ResourceBase implements Resource {
 		this.name = checkNotNull(name);
 		this.text = isText;
 		this.filename = checkNotNull(filename);
+		LOG.debug(getClass().getSimpleName() + "(" + name + ", " + filename + ", " + isText + ")");
 	}
 
 	@Override

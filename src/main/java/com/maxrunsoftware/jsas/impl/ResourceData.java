@@ -20,12 +20,14 @@ import static com.google.common.base.Preconditions.*;
 import com.maxrunsoftware.jsas.Util;
 
 public class ResourceData extends ResourceBase {
+	private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger(HttpClientApache.class);
 
 	private final byte[] data;
 
 	public ResourceData(String name, byte[] data, String filename) {
 		super(name, filename, false);
 		this.data = Util.copy(checkNotNull(data));
+		LOG.debug(getClass().getSimpleName() + "(" + name + ", data[" + data.length + "], " + filename + ")");
 	}
 
 	@Override
