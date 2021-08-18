@@ -17,6 +17,7 @@ package com.maxrunsoftware.jsas.impl;
 
 import java.nio.file.Paths;
 
+import com.maxrunsoftware.jsas.Constant;
 import com.maxrunsoftware.jsas.SettingService;
 import com.maxrunsoftware.jsas.Util;
 
@@ -36,38 +37,38 @@ public class SettingServiceEnvironment implements SettingService {
 
 	@Override
 	public String getLogging() {
-		return getEnvVar("JSAS_LOGGING", "info");
+		return getEnvVar(Constant.ENV_JSAS_LOGGING, "info");
 	}
 
 	@Override
 	public int getDirectoryCacheTime() {
-		return getEnvVar("JSAS_DIRCACHETIME", 5000);
+		return getEnvVar(Constant.ENV_JSAS_DIRCACHETIME, 5000);
 	}
 
 	@Override
 	public String getDirectory() {
-		return getEnvVar("JSAS_DIR", Paths.get(".").toAbsolutePath().normalize().toString());
+		return getEnvVar(Constant.ENV_JSAS_DIR, Paths.get(".").toAbsolutePath().normalize().toString());
 		// return "/Users/user/Temp";
 	}
 
 	@Override
 	public int getPort() {
-		return getEnvVar("JSAS_PORT", 8080);
+		return getEnvVar(Constant.ENV_JSAS_PORT, 8080);
 	}
 
 	@Override
 	public int getMaxThreads() {
-		return getEnvVar("JSAS_MAXTHREADS", 100);
+		return getEnvVar(Constant.ENV_JSAS_MAXTHREADS, 100);
 	}
 
 	@Override
 	public int getMinThreads() {
-		return getEnvVar("JSAS_MINTHREADS", 10);
+		return getEnvVar(Constant.ENV_JSAS_MINTHREADS, 10);
 	}
 
 	@Override
 	public int getIdleTimeout() {
-		return getEnvVar("JSAS_IDLETIMEOUT", 120);
+		return getEnvVar(Constant.ENV_JSAS_IDLETIMEOUT, 120);
 	}
 
 }

@@ -18,8 +18,7 @@ package com.maxrunsoftware.jsas;
 import java.util.List;
 
 public class Constant {
-	private Constant() {
-	}
+	private Constant() {}
 
 	public static final List<String> TXT_EXTS = List.of("txt", "html");
 
@@ -42,5 +41,13 @@ public class Constant {
 	public static final String CONTENTTYPE_BINARY = "application/octet-stream";
 
 	public static final String ENCODING_UTF8 = "UTF-8";
+
+	public static final String ENV_JSAS_LOGGING = "JSAS_LOGGING";
+	public static final String ENV_JSAS_DIRCACHETIME = "JSAS_DIRCACHETIME";
+	public static final String ENV_JSAS_DIR = "JSAS_DIR";
+	public static final String ENV_JSAS_PORT = "JSAS_PORT";
+	public static final String ENV_JSAS_MAXTHREADS = "JSAS_MAXTHREADS";
+	public static final String ENV_JSAS_MINTHREADS = "JSAS_MINTHREADS";
+	public static final String ENV_JSAS_IDLETIMEOUT = "JSAS_IDLETIMEOUT";
 
 }
