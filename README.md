@@ -6,7 +6,7 @@
 <password>_<name>.<ext>
 ```
  
- This server will serve any resources containing an underscore. So if you wanted the password to be MyPass and the resource name to be MyData you would name your file...
+ This server will serve any resources containing an underscore. So if you wanted the password to be MyPass and the user name to be MyData you would name your file...
 ```sh
 MyPass_MyData.txt
 ```
