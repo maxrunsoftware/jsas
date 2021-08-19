@@ -16,5 +16,5 @@
 package com.maxrunsoftware.jsas;
 
 public interface HttpClient {
-	public Resource Get(String host, String username, String password);
+	public Resource get(String host, String username, String password);
 }

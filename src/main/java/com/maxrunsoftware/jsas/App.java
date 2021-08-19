@@ -90,7 +90,7 @@ public class App {
 		var pass = args[1];
 		var name = args[2];
 
-		var resource = httpClient.Get(host, name, pass);
+		var resource = httpClient.get(host, name, pass);
 		if (resource == null) {
 			LOG.warn("Error retrieving response");
 		} else {

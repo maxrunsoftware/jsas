@@ -34,7 +34,7 @@ public class HttpClientApache implements HttpClient {
 	private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger(HttpClientApache.class);
 
 	@Override
-	public Resource Get(String host, String username, String password) {
+	public Resource get(String host, String username, String password) {
 		checkNotNull(host);
 		HttpGet httpGet = new HttpGet(host);
 		if (username != null) { httpGet.addHeader("Authorization", Util.httpAuthorizationEncode(username, password)); }
