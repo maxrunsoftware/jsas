@@ -95,6 +95,7 @@ public class ResourceHttpResponseApache implements Resource {
 		// get filename;
 		String fn = null;
 		var cd = headers.getFirst("content-disposition");
+		LOG.trace("content-disposition: " + cd);
 		if (cd != null) {
 			var parts = Util.split(cd, "filename=");
 			if (parts.length == 2) {
@@ -105,8 +106,7 @@ public class ResourceHttpResponseApache implements Resource {
 				fn = part;
 			}
 		}
-		filename = fn;
-		LOG.trace("content-disposition: " + cd);
+		filename = Util.coalesce(fn, name);
 
 		// get isText
 		var istext = false;
@@ -166,4 +166,8 @@ public class ResourceHttpResponseApache implements Resource {
 		return filename;
 	}
 
+	@Override
+	public String toString() {
+		return ResourceBase.toString(this);
+	}
 }

@@ -58,24 +58,28 @@ public abstract class ResourceBase implements Resource {
 		return filename;
 	}
 
-	@Override
-	public String toString() {
+	public static String toString(Resource resource) {
 		var sb = new StringBuilder();
 
-		sb.append(getClass().getName() + " [");
-		sb.append("Name: " + getName());
-		sb.append(", Description: " + getDescription());
-		sb.append(", Filename: " + getFilename());
-		sb.append(", IsText: " + isText());
-		var d = getData();
+		sb.append(resource.getClass().getName() + " [");
+		sb.append("Name: " + resource.getName());
+		sb.append(", Description: " + resource.getDescription());
+		sb.append(", Filename: " + resource.getFilename());
+		sb.append(", IsText: " + resource.isText());
+		var d = resource.getData();
 		if (d == null) {
 			sb.append(", Data: null");
 		} else {
 			sb.append(", Data: byte[" + d.length + "]");
 		}
-		sb.append(", Text: " + getText());
+		sb.append(", Text: " + resource.getText());
 		sb.append("]");
 
 		return sb.toString();
+	}
+
+	@Override
+	public String toString() {
+		return toString(this);
 	}
 }

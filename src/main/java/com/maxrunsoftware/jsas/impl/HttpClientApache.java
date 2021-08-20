@@ -37,12 +37,20 @@ public class HttpClientApache implements HttpClient {
 	public Resource get(String host, String username, String password) {
 		checkNotNull(host);
 		HttpGet httpGet = new HttpGet(host);
-		if (username != null) { httpGet.addHeader("Authorization", Util.httpAuthorizationEncode(username, password)); }
+		if (username != null) {
+			LOG.debug("Username supplied so adding Authorization header");
+			httpGet.addHeader("Authorization", Util.httpAuthorizationEncode(username, password));
+		}
+
 		try {
 			// try (CloseableHttpClient httpclient = HttpClients.createDefault()) {
 			try (CloseableHttpClient httpclient = createClient()) {
+				LOG.trace("HttpClient created: " + httpclient.getClass().getName());
 				try (CloseableHttpResponse response = httpclient.execute(httpGet)) {
-					return new ResourceHttpResponseApache(response);
+					LOG.trace("Received response: " + response.getClass().getName());
+					var resource = new ResourceHttpResponseApache(response);
+					LOG.trace("Created resource: " + resource);
+					return resource;
 				}
 
 			}
