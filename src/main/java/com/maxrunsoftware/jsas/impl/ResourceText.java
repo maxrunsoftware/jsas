@@ -18,12 +18,14 @@ package com.maxrunsoftware.jsas.impl;
 import static com.google.common.base.Preconditions.*;
 
 public class ResourceText extends ResourceBase {
+	private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger(HttpClientApache.class);
 
 	private final String text;
 
 	public ResourceText(String name, String text, String filename) {
 		super(name, filename, true);
 		this.text = checkNotNull(text);
+		LOG.debug(getClass().getSimpleName() + "(" + name + ", " + text + ", " + filename + ")");
 	}
 
 	@Override
