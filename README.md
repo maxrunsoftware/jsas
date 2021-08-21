@@ -30,10 +30,11 @@ java -jar jsas.jar https://192.168.0.10 samplePass samplefile
  **Disclaimer:** We make no claims in the secureness of this application. It seems to be secure enough for internal use. We would be hesitant to recommend exposing it publically without further testing. If you find a bug or security hole, let us know!
  
 Environment Variables:
-- JSAS_LOGGING - The logging level defaulted to INFO, TRACE/DEBUG/INFO/WARN/ERROR
-- JSAS_DIRCACHETIME - The amount of time the directory scanner will cache the files in a directory defaulted to 5 seconds
-- JSAS_DIR - The directory to pull files from defaulted to working directory
-- JSAS_PORT - Port for the web server defaulted to 8080
-- JSAS_MAXTHREADS - Max threads of the web server
-- JSAS_MINTHREADS - Min threads of the web server
-- JSAS_IDLETIMEOUT - Idle timeout of the web server
+- JSAS_LOGGING - The logging level TRACE/DEBUG/INFO/WARN/ERROR (INFO)
+- JSAS_DIRCACHETIME - The amount of time in milliseconds the directory scanner will cache the directory listing (5000)
+- JSAS_DIR - The directory to pull files from (working directory)
+- JSAS_PORT - Port for the web server (8080)
+- JSAS_MAXTHREADS - Max threads of the web server (100)
+- JSAS_MINTHREADS - Min threads of the web server (10)
+- JSAS_IDLETIMEOUT - Idle timeout of the web server (120)
+- JSAS_JOINTHREAD - Join the webserver thread (true)
