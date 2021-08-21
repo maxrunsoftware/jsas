@@ -89,7 +89,8 @@ public class WebServerJetty implements WebServer {
 
 		LOG.info("Starting server on port " + port);
 		server.start();
-		server.join();
+
+		// server.join();
 
 	}
 

@@ -77,24 +77,39 @@ public class App {
 	private void handleServer() {
 		try {
 			webServer.start();
-			// webServer.stop();
+			while (true) {
+				System.out.println("Type 'q', 'quit', 'exit' to exit");
+				var input = Util.trimOrNull(Util.readLine());
+				if (Util.equalsAnyIgnoreCase(input, "q", "quit", "exit")) break;
+			}
+			webServer.stop();
 		} catch (Exception e) {
 			LOG.error("Error in web server", e);
 		}
 	}
 
 	private void handleClient(String[] args) {
-		if (args.length != 3) throw new Error("Invalid arguments");
+		if (args.length != 3) {
+			handleClientError();
+			return;
+		}
 
-		var host = args[0];
-		var pass = args[1];
-		var name = args[2];
+		var host = Util.trimOrNull(args[0]);
+		LOG.debug("Host: " + host);
+		var pass = Util.trimOrNull(args[1]);
+		LOG.debug("Password: " + pass);
+		var name = Util.trimOrNull(args[2]);
+		LOG.debug("ResourceName: " + name);
+
+		if (host == null || pass == null || name == null) {
+			handleClientError();
+			return;
+		}
 
 		var resource = httpClient.get(host, name, pass);
 		if (resource == null) {
 			LOG.warn("Error retrieving response");
 		} else {
-
 			if (resource.isText()) {
 				LOG.info("Received Text: \n" + resource.getText());
 			} else {
@@ -102,6 +117,12 @@ public class App {
 			}
 		}
 
+	}
+
+	private void handleClientError() {
+		LOG.error("Invalid argument format");
+		LOG.error("java -jar jsas.jar <url> <password> <resourceName>");
+		LOG.error("java -jar jsas.jar https://192.168.0.10 MyPass somefile");
 	}
 
 }

@@ -15,6 +15,9 @@
  */
 package com.maxrunsoftware.jsas;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import java.util.regex.Pattern;
@@ -87,6 +90,52 @@ public final class Util {
 			if (val != null) return val;
 		}
 		return null;
+	}
+
+	@SafeVarargs
+	public static final <T> boolean equalsAny(T sourceObj, T... otherObjs) {
+		//@formatter:off
+		if (otherObjs == null || otherObjs.length == 0) return false;
+		for (T otherObj : otherObjs) {
+			if (sourceObj == null) {
+				if (otherObj == null) return true;
+			} else {
+				if (otherObj != null) {
+					if (sourceObj.equals(otherObj)) return true; 
+				}
+			}
+		}
+		//@formatter:on
+		return false;
+	}
+
+	@SafeVarargs
+	public static final boolean equalsAnyIgnoreCase(String sourceObj, String... otherObjs) {
+		//@formatter:off
+		if (otherObjs == null || otherObjs.length == 0) return false;
+		for (String otherObj : otherObjs) {
+			if (sourceObj == null) {
+				if (otherObj == null) return true;
+			} else {
+				if (otherObj != null) {
+					if (sourceObj.equalsIgnoreCase(otherObj)) return true; 
+				}
+			}
+		}
+		//@formatter:on
+		return false;
+	}
+
+	public static final String readLine() {
+		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+
+		try {
+			return reader.readLine();
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		}
+
 	}
 
 }
