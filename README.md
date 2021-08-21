@@ -3,25 +3,35 @@
 
 ## (J)ava (S)imple (A)uthenticator (S)ervice
  
- The goal of this project is to provide a simple solution to retrieving sensitive data from remote systems programmatically without the need of external libraries. Most programming languages have WGet type functionality and support basic authentication. Leveraging these 2 items, we can create a simple HttpGet server that once provided with a username and password will retrieve a specific resource. In this case, the basic authentication username is the resource name to retrieve and the password is the password on the resource. But how are the password and resource name assigned to a file? By utilizing the file name we can embed the password and resource name into the file name...
+ The goal of this project is to provide a simple solution to retrieving sensitive data from remote systems programmatically without the need of external libraries. Most programming languages have WGet type functionality and support basic authentication. Leveraging these 2 items, we can create a simple HttpGet server that once provided with a username and password will retrieve a specific resource. In this case, the basic authentication username is the resource name to retrieve and the password is the password on the resource. But how are the password and resource name assigned to a file? By utilizing the file name we can embed the password and resource name (username) into the file name...
 ```
-<password>_<name>.<ext>
+<password>_<username>.<ext>
 ```
  
- **This server will serve any resources containing an underscore in the file name.** So if you wanted the password to be ```MyPass``` and the user name to be ```MyData``` you would name your file...
+ ### ***This server will serve any resources containing an underscore in the file name.*** 
+ &nbsp;
+ 
+ So if you wanted the password to be ```MyPass``` and the user name to be ```MyData``` you would name your file...
 ```
 MyPass_MyData.txt
 ```
- 
- .txt and .html file extensions are sent as UTF-8 text content type back to the client. If the file ends in any other extension then the data is sent back to the client as binary.
+
+Certain file extensions are sent as UTF-8 text content back to the client.
+- ```.txt```
+- ```.html```
+- ```.xml```
+- ```.json```
+- ```.js```
+
+If the file ends in any other extension then the data is sent back to the client as binary.
  
  A description can be included when naming the file in the format...
 ```
-<description>_<password>_<name>.<ext>
+<description>_<password>_<username>.<ext>
 ```
  ...which is strictly optional and currently serves no other purpose then to group the files in your serving directory.
  
- A docker-compose.yml file is included in the project to quickly deploy the system into Docker. Setting up an https encryption proxy in front of the app is **highly recommended** and the docker-compose is setup to serve via HTTPS, just plug in your public and private keys into certificate.crt and certificate.key respectively.
+ A docker-compose.yml file is included in the project to quickly deploy the system into Docker. Setting up an https encryption proxy in front of the app is ***highly recommended*** and the docker-compose is setup to serve via HTTPS, just plug in your public and private keys into certificate.crt and certificate.key respectively.
  
  A tester application is included with the Java app. Just...
 ```
@@ -40,3 +50,4 @@ Environment Variables:
 - ```JSAS_MINTHREADS``` &nbsp;&nbsp;&nbsp;&nbsp; Min threads of the web server (```10```)
 - ```JSAS_IDLETIMEOUT``` &nbsp;&nbsp;&nbsp;&nbsp; Idle timeout of the web server (```120```)
 - ```JSAS_JOINTHREAD``` &nbsp;&nbsp;&nbsp;&nbsp; Join the webserver thread (```true```)
+
