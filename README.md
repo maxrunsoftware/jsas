@@ -1,4 +1,6 @@
 # JSAS
+[Max Run Software](https://www.maxrunsoftware.com)
+
 ## (J)ava (S)imple (A)uthenticator (S)ervice
  
  The goal of this project is to provide a simple solution to retrieving sensitive data from remote systems programmatically without the need of external libraries. Most programming languages have WGet type functionality and support basic authentication. Leveraging these 2 items, we can create a simple HttpGet server that once provided with a username and password will retrieve a specific resource. In this case, the basic authentication username is the resource name to retrieve and the password is the password on the resource. But how are the password and resource name assigned to a file? By utilizing the file name we can embed the password and resource name into the file name...
