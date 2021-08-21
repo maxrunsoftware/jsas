@@ -7,7 +7,7 @@
 
 	<groupId>com.maxrunsoftware</groupId>
 	<artifactId>jsas</artifactId>
-	<version>1.0.1</version>
+	<version>1.0.2</version>
 
 	<name>jsas</name>
 	<url>http://www.maxrunsoftware.com</url>
@@ -125,6 +125,24 @@
 		</pluginManagement>
 
 		<plugins>
+
+
+			<plugin>
+			    <groupId>org.codehaus.mojo</groupId>
+			    <artifactId>templating-maven-plugin</artifactId>
+			    <version>1.0.0</version>
+			    <executions>
+			        <execution>
+			            <id>filtering-java-templates</id>
+			            <goals>
+			                <goal>filter-sources</goal>
+			            </goals>
+			        </execution>
+			    </executions>
+			</plugin>
+
+
+
 
 			<plugin>
 				<artifactId>maven-assembly-plugin</artifactId>
