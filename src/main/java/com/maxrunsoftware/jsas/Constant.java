@@ -20,7 +20,15 @@ import java.util.List;
 public class Constant {
 	private Constant() {}
 
-	public static final List<String> TXT_EXTS = List.of("txt", "html");
+	public static final List<String> TXT_EXTS = List.of(
+	//@formatter:off
+			"txt", 
+			"html",
+			"xml",
+			"json",
+			"js"
+	//@formatter:on
+	);
 
 	public static final List<String> MIME_TEXT = List.of(
 	//@formatter:off
@@ -37,7 +45,6 @@ public class Constant {
 	);
 
 	public static final String CONTENTTYPE_TEXT = "text/plain";
-
 	public static final String CONTENTTYPE_BINARY = "application/octet-stream";
 
 	public static final String ENCODING_UTF8 = "UTF-8";
