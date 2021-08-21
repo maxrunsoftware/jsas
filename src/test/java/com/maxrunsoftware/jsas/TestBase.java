@@ -15,21 +15,11 @@
  */
 package com.maxrunsoftware.jsas;
 
-import static org.junit.Assert.*;
+import org.junit.BeforeClass;
 
-import org.junit.Test;
-
-/**
- * Unit test for simple App.
- */
-public class AppTest extends TestBase {
-
-	/**
-	 * Rigorous Test :-)
-	 */
-	@Test
-	public void shouldAnswerWithTrue() {
-		assertTrue(true);
-
+public abstract class TestBase {
+	@BeforeClass
+	public static void setUpClass() {
+		LoggingSetup.initialize("debug");
 	}
 }

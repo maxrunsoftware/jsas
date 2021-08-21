@@ -19,9 +19,10 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import com.maxrunsoftware.jsas.TestBase;
 import com.maxrunsoftware.jsas.Util;
 
-public class ResourceFileTest {
+public class ResourceFileTest extends TestBase {
 
 	@Test
 	public void test() {

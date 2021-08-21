@@ -17,7 +17,7 @@ package com.maxrunsoftware.jsas;
 
 import org.junit.Test;
 
-public class LoggingSetupTest {
+public class LoggingSetupTest extends TestBase {
 
 	@Test
 	public void testInitialize() {
