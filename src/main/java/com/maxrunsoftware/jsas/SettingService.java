@@ -15,27 +15,46 @@
  */
 package com.maxrunsoftware.jsas;
 
+import java.nio.file.Paths;
 import java.util.Map;
 
 import org.apache.commons.collections4.map.CaseInsensitiveMap;
 
 public interface SettingService {
 
-	public String getLogging();
+	public default boolean getJoinThread() {
+		return true;
+	}
 
-	public int getPort();
+	public default String getLogging() {
+		return "INFO";
+	}
 
-	public String getDirectory();
+	public default int getPort() {
+		return 8080;
+	}
 
-	public int getDirectoryCacheTime();
+	public default String getDirectory() {
+		return Paths.get(".").toAbsolutePath().normalize().toString();
+	}
 
-	public int getMaxThreads();
+	public default int getDirectoryCacheTime() {
+		return 5000;
+	}
 
-	public int getMinThreads();
+	public default int getMaxThreads() {
+		return 100;
+	}
 
-	public int getIdleTimeout();
+	public default int getMinThreads() {
+		return 10;
+	}
 
-	default Map<String, Object> toMap() {
+	public default int getIdleTimeout() {
+		return 120;
+	}
+
+	public default Map<String, Object> toMap() {
 		var map = new CaseInsensitiveMap<String, Object>();
 		map.put("Logging", getLogging());
 		map.put("Port", getPort());

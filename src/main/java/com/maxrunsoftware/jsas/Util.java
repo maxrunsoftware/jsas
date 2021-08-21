@@ -135,7 +135,32 @@ public final class Util {
 			e.printStackTrace();
 			return null;
 		}
-
 	}
 
+	public static final String getEnvironmentVariable(String name) {
+		return Util.trimOrNull(System.getenv(name));
+	}
+
+	public static final String getEnvironmentVariable(String name, String defaultValue) {
+		return coalesce(getEnvironmentVariable(name), defaultValue);
+	}
+
+	public static final int getEnvironmentVariable(String name, int defaultValue) {
+		var val = getEnvironmentVariable(name, null);
+		if (val == null) return defaultValue;
+		return Integer.parseInt(val);
+	}
+
+	public static final boolean getEnvironmentVariable(String name, boolean defaultValue) {
+		var val = getEnvironmentVariable(name, null);
+		if (val == null) return defaultValue;
+		return parseBoolean(val);
+	}
+
+	public static final boolean parseBoolean(String val) {
+		if (val == null) throw new IllegalArgumentException("Invalid boolean value: " + val);
+		if (equalsAnyIgnoreCase(val, "true", "t", "yes", "y", "1")) return true;
+		if (equalsAnyIgnoreCase(val, "false", "f", "no", "n", "0")) return false;
+		throw new IllegalArgumentException("Invalid boolean value: " + val);
+	}
 }

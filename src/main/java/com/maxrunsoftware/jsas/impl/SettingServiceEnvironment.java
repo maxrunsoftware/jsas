@@ -15,60 +15,40 @@
  */
 package com.maxrunsoftware.jsas.impl;
 
-import java.nio.file.Paths;
-
 import com.maxrunsoftware.jsas.Constant;
 import com.maxrunsoftware.jsas.SettingService;
 import com.maxrunsoftware.jsas.Util;
 
 public class SettingServiceEnvironment implements SettingService {
-	private String getEnvVar(String name, String defaultValue) {
-		var val = System.getenv(name);
-		val = Util.trimOrNull(val);
-		if (val != null) return val;
-		return defaultValue;
-	}
-
-	private int getEnvVar(String name, int defaultValue) {
-		var val = getEnvVar(name, null);
-		if (val == null) return defaultValue;
-		return Integer.parseInt(val);
-	}
-
-	@Override
-	public String getLogging() {
-		return getEnvVar(Constant.ENV_JSAS_LOGGING, "info");
-	}
 
 	@Override
 	public int getDirectoryCacheTime() {
-		return getEnvVar(Constant.ENV_JSAS_DIRCACHETIME, 5000);
+		return Util.getEnvironmentVariable(Constant.ENV_JSAS_DIRCACHETIME, SettingService.super.getDirectoryCacheTime());
 	}
 
 	@Override
 	public String getDirectory() {
-		return getEnvVar(Constant.ENV_JSAS_DIR, Paths.get(".").toAbsolutePath().normalize().toString());
-		// return "/Users/user/Temp";
+		return Util.getEnvironmentVariable(Constant.ENV_JSAS_DIR, SettingService.super.getDirectory());
 	}
 
 	@Override
 	public int getPort() {
-		return getEnvVar(Constant.ENV_JSAS_PORT, 8080);
+		return Util.getEnvironmentVariable(Constant.ENV_JSAS_PORT, SettingService.super.getPort());
 	}
 
 	@Override
 	public int getMaxThreads() {
-		return getEnvVar(Constant.ENV_JSAS_MAXTHREADS, 100);
+		return Util.getEnvironmentVariable(Constant.ENV_JSAS_MAXTHREADS, SettingService.super.getMaxThreads());
 	}
 
 	@Override
 	public int getMinThreads() {
-		return getEnvVar(Constant.ENV_JSAS_MINTHREADS, 10);
+		return Util.getEnvironmentVariable(Constant.ENV_JSAS_MINTHREADS, SettingService.super.getMinThreads());
 	}
 
 	@Override
 	public int getIdleTimeout() {
-		return getEnvVar(Constant.ENV_JSAS_IDLETIMEOUT, 120);
+		return Util.getEnvironmentVariable(Constant.ENV_JSAS_IDLETIMEOUT, SettingService.super.getIdleTimeout());
 	}
 
 }

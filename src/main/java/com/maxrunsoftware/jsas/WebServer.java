@@ -16,7 +16,7 @@
 package com.maxrunsoftware.jsas;
 
 public interface WebServer {
-	public void start() throws Exception;
+	public void start(boolean joinThread) throws Exception;
 
 	public void stop() throws Exception;
 }

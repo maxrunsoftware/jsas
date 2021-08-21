@@ -47,7 +47,7 @@ public class WebServerJetty implements WebServer {
 	}
 
 	@Override
-	public void start() throws Exception {
+	public void start(boolean joinThread) throws Exception {
 
 		var maxThreads = settings.getMaxThreads();
 		LOG.debug("maxThreads: " + maxThreads);
@@ -90,7 +90,10 @@ public class WebServerJetty implements WebServer {
 		LOG.info("Starting server on port " + port);
 		server.start();
 
-		// server.join();
+		if (joinThread) {
+			LOG.debug("Joining <main> thread");
+			server.join();
+		}
 
 	}
 

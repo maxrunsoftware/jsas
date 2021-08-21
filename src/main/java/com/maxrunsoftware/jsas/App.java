@@ -30,7 +30,7 @@ import com.maxrunsoftware.jsas.impl.WebServerJetty;
 
 public class App {
 	private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger(App.class);
-
+	private static final SettingService DEFAULTS = new SettingService() {};
 	private final HttpClient httpClient;
 	private final WebServer webServer;
 
@@ -46,7 +46,7 @@ public class App {
 	}
 
 	public static void main(String[] args) {
-		LoggingSetup.initialize(System.getenv("JSAS_LOGGING"));
+		LoggingSetup.initialize(Util.getEnvironmentVariable(Constant.ENV_JSAS_LOGGING, DEFAULTS.getLogging()));
 		LOG.info("(J)ava (S)imple (A)uthenticator (S)ervice  v" + Version.VALUE + "  dev@maxrunsoftware.com");
 
 		var module = new AbstractModule() {
@@ -76,11 +76,14 @@ public class App {
 
 	private void handleServer() {
 		try {
-			webServer.start();
-			while (true) {
-				System.out.println("Type 'q', 'quit', 'exit' to exit");
-				var input = Util.trimOrNull(Util.readLine());
-				if (Util.equalsAnyIgnoreCase(input, "q", "quit", "exit")) break;
+			var joinThread = Util.getEnvironmentVariable(Constant.ENV_JSAS_JOINTHREAD, DEFAULTS.getJoinThread());
+			webServer.start(joinThread);
+			if (!joinThread) {
+				while (true) {
+					System.out.println("Type 'q', 'quit', 'exit' to exit");
+					var input = Util.trimOrNull(Util.readLine());
+					if (Util.equalsAnyIgnoreCase(input, "q", "quit", "exit")) break;
+				}
 			}
 			webServer.stop();
 		} catch (Exception e) {

@@ -49,5 +49,5 @@ public class Constant {
 	public static final String ENV_JSAS_MAXTHREADS = "JSAS_MAXTHREADS";
 	public static final String ENV_JSAS_MINTHREADS = "JSAS_MINTHREADS";
 	public static final String ENV_JSAS_IDLETIMEOUT = "JSAS_IDLETIMEOUT";
-
+	public static final String ENV_JSAS_JOINTHREAD = "JSAS_JOINTHREAD";
 }
