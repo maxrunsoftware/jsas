@@ -65,7 +65,6 @@ public class Servlet extends HttpServlet {
 		LOG.info("Unauthorized");
 		response.setContentType(Constant.CONTENTTYPE_TEXT);
 		response.setCharacterEncoding(Constant.ENCODING_UTF8);
-
 		response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 		response.getWriter().println("UNAUTHORIZED");
 	}
